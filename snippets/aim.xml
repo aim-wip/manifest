@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote name="aim"
+          fetch="https://github.com/aim-wip"
+          revision="11.0" />
+
+  <remote name="aimrom-devices"
+          fetch="https://github.com/AIMROM-DEVICES"
+          revision="11.0" />
+
+  <remote name="gitlab"
+          fetch="https://gitlab.com" />
+
+  <!-- Manifest -->
+  <project path="manifest" name="manifest" remote="aim" />
+
+  <!-- Build Repos -->
+  <remove-project name="platform/build" />
+  <project path="build/make" name="build" groups="pdk" remote="aim">
+    <copyfile src="core/root.mk" dest="Makefile" />
+    <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
+    <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
+    <linkfile src="core" dest="build/core" />
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh" />
+    <linkfile src="target" dest="build/target" />
+    <linkfile src="tools" dest="build/tools" />
+  </project>
+  <remove-project name="platform/build/soong" />
+  <project path="build/soong" name="build_soong" groups="pdk,tradefed" remote="aim" >
+    <linkfile src="root.bp" dest="Android.bp" />
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
+  </project>
+
+  <!-- Device repos -->
+  <project path="device/aim/sepolicy" name="device_aim_sepolicy" remote="aim" />
+
+  <!-- External repos -->
+  <!--project path="external/airbnb-lottie" name="external_airbnb-lottie" remote="aim" /-->
+
+  <!-- Framework repos -->
+  <project path="frameworks/av" name="frameworks_av" groups="pdk" remote="aim" />
+  <project path="frameworks/base" name="frameworks_base" groups="pdk-cw-fs,pdk-fs" remote="aim" />
+
+  <!--project path="frameworks/opt/slimrecent" name="frameworks_opt_slimrecent" remote="aim" /-->
+
+  <!-- Hardware repos -->
+  <project path="hardware/aim/interfaces" name="hardware_aim_interfaces" remote="aim" />
+
+  <!-- Packages repos -->
+  <project path="packages/apps/Settings" name="packages_apps_Settings" groups="pdk-fs" remote="aim" />
+  <!--project path="packages/apps/Updater" name="packages_apps_Updater" remote="aim" /-->
+
+  <!--project path="packages/apps/OmniSwitch" name="packages_apps_OmniSwitch" remote="aim" />
+  <project path="packages/apps/OmniStyle" name="packages_apps_OmniStyle" remote="aim" /-->
+  <project path="packages/apps/freedomhub" name="packages_apps_freedomhub" remote="aim" />
+
+  <!-- System repos -->
+  <project path="system/core" name="system_core" groups="pdk" remote="aim"/>
+
+  <!-- Vendor -->
+  <project path="vendor/aim" name="vendor_aim" remote="aim" />
+
+</manifest>
